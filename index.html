@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="second js application">
+    <meta name="keywords" content="JS CSS HTML colors">
+    <meta name="author" content="MichRad">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Ua-Compatible" content="IE=edge,chrome=1">
+    <title>Random Color Generator</title>
+    <link rel="shortcut icon" href="Icons/random.svg" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.6.1/randomColor.min.js"></script>
+    <link rel="stylesheet" href="style.css">    
+    <script src="script.js" defer></script>
+ </head>
+ <body>
+  <h1><div class="shadow-lg w-50 p-3 mb-5 bg-white rounded">Random Color Generator</div></h1>
+  <p class="header"><span id="Welcome"></span></p>
+  <p class="link"><span>You can read about<a href="https://www.w3schools.com/colors/colors_names.asp" target="_blank"> HTML colors names here</a></span></p>
+  <div class="buttons">
+    <button type="button" class="btn primaryMod" onclick="colorFirstDiv(), openCloseModal()" data-html="true" data-toggle="tooltip" data-placement="top"
+    title="Generate one of 16777216 RGB colors; Get the name of the closest HTML color from <u><b>www.thecolorapi.com</b></u>">Generate color</button>
+    <button type="button" class="btn successMod" onClick="window.location.reload();" data-toggle="tooltip" data-placement="top"
+    title="Refresh the page">Reload the page</button>
+  </div>
+  <div id="mainDiv">
+    <div class="divLevel2">
+      <p class="info firstLine">Randomly generated color:</p>
+      <p class="info hide" style="color: gray; font-weight: bold;">generate color first...</p>
+      <div class="divLevel3" id="generatedBGC"></div>
+      <p class="info" id="HEXvalue"></p>
+      <p class="info" id="RGBvalue"></p>
+      <p class="info" id="HSLvalue"></p>
+    </div>
+    <div class="divLevel2">
+      <p class="fetched firstLine">The nearest HTML color name [distance]:</p>
+      <p class="fetched"><span>generate color first...</span></p>
+      <div class="divLevel3" id="fetchedBGC"></div>
+      <p class="info" id="HEXvalue2"></p>
+      <p class="info" id="RGBvalue2"></p>
+      <p class="info" id="HSLvalue2"></p>
+    </div>
+    <div class="divLevel2" style="height: 324px;">
+        <p class="info firstLine">Change the randomly generated color:</p>
+        <p class="info hide" style="color: gray; font-weight: bold;">generate color first...</p>
+        <div class="divLevel3" id="colorToChange"></div>
+        <p class="info" id="HEXvalue3"></p>
+        <p class="info" id="RGBvalue3"></p>
+        <p class="info" id="HSLvalue3"></p>
+        <p class="info" id="CMYKvalue3"></p>
+    </div>
+    <div class="divLevel2" style="height: 324px;">
+      <p class="info firstLine">Grayscale (black-and-white):</p>
+      <p class="info hide" style="color: gray; font-weight: bold;">generate color first...</p>
+      <div class="divLevel3" id="grayScaleBGC"></div>
+      <p class="info" id="HEXvalue4"></p>
+      <p class="info" id="GrayValue"></p>
+      <p class="info" id="HSLvalue4"></p>
+      <p class="info" id="CMYKvalue4"></p>
+    </div>
+  </div>
+  <div class="buttonsBGC">
+    <button type="button" id="colorRBG" class="btn btn-secondary roundedMod" onclick="setColorRBG()" data-toggle="tooltip" data-placement="top"
+    title="Set this color as background color">Set color as BGC</button>
+    <button type="button" class="btn btn-outline-default roundedMod" onclick="document.body.style.background='initial'" data-toggle="tooltip" data-placement="top"
+    title="Restore default (white) background color">Restore default BGC</button>
+    <button type="button" id="=colorHSL" class="btn btn-info roundedMod" onclick="setColorHSL()" data-toggle="tooltip" data-placement="top"
+    title="Set this color as background color">Set color as BGC</button>
+  </div>
+  <div class="utils">
+    <div class="colorsRange">
+      <h3>Change Your Color</h3>
+      <div class="rangeInfo"><label for="red">Red [0-255]:</label><p id="redValue">0</p></div>
+      <input type="range" id='rangeRed' value="" min="0" max="255" class="slider">
+      <div class="rangeInfo"><label for="green">Green [0-255]:</label><p id="greenValue">0</p></div>
+      <input type="range" id='rangeGreen' value="" min="0" max="255" class="slider">
+      <div class="rangeInfo"><label for="blue">Blue [0-255]:</label><p id="blueValue">0</p></div>
+      <input type="range" id='rangeBlue' value="" min="0" max="255" class="slider">
+    </div>
+    <div class="rangeHSL">
+      <h3>Change the Grayscale</h3>
+      <div class="rangeInfo"><label for="hue">Hue [0° (=red) - 360° (=red)]:</label><p id="hueValue">0°</p></div>
+      <input type="range" id='rangeHue' value="" min="0" max="360" class="slider">
+      <div class="rangeInfo"><label for="saturation">Saturation [0% (grayness) - 100% (full color)]:</label><p id="saturationValue">0%</p></div>
+      <input type="range" id='rangeSaturation' value="" min="0" max="100" class="slider">
+      <div class="rangeInfo"><label for="lightness">Lightness [0% (=black) - 100% (=white)]:</label><p id="lightnessValue">0%</p></div>
+      <input type="range" id='rangeLightness' value="" min="0" max="100" class="slider">
+    </div>
+  </div>
+  <!-- Central Modal Medium Info [Bootstrap Material Editor]-->
+  <div class="modal fade" id="ModalInfo" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-notify modal-info modal-dialog-centered modal-lg" role="document">
+      <!--Content-->
+      <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header">
+          <p class="heading lead">Generating color...</p>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="white-text">&times;</span>
+          </button>
+        </div>
+        <!--Body-->
+        <div class="modal-body">
+          <div class="text-center">
+            <div class="container">
+              <h4>Please wait a while...</h4>
+              <div class="progress" style="height:40px">
+                <div class="progress-bar bg-warning" style="width: 0%; color:black; font-size: large;">0%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Footer-->
+        <div class="modal-footer justify-content-center">
+          <p>Fetching data ...</p>
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+  <!-- Central Modal Medium Info - END -->
+  <div class="charts">
+    <div class="chartsLeft">
+      <p class="infoChart">Amount of primary colors in the RGB model</p>
+      <canvas id="barChart" style="max-width: 250px; max-height: 250px;"></canvas>
+      <p class="infoChart">Percentage of primary colors in the RGB model</p>
+      <canvas id="labelChart" style="max-width: 250px; max-height: 250px;"></canvas>
+      <p class="infoChart">Colors in the CMYK model,<br>used in color printing</p>
+      <canvas id="barCMYKcolor" style="max-width: 250px; max-height: 250px;"></canvas>
+    </div>
+    <div class="chartsRight">
+      <p class="infoChart">Hue in the HSL model<br>[360° kolor wheel]</p>
+      <canvas id="doughnutChart" style="max-width: 250px; max-height: 250px;"></canvas>
+      <p class="infoChart">Saturation and Lightness in the HSL model</p>
+      <canvas id="horizontalBar" style="max-width: 250px; max-height: 250px;"></canvas>
+      <p class="infoChart">Colors in the CMYK model,<br>used in color printing</p>
+      <canvas id="barCMYKgray" style="max-width: 250px; max-height: 250px;"></canvas>
+    </div>
+  </div>
+  <div class="infoLinks">
+    <button type="button" class="btn purple-gradient" data-toggle="modal" data-target="#fullHeightModalTop" id="infoBtn" data-toggle="tooltip" data-placement="auto"
+    title="Useful Info and Links">Info & Links</button>
+    <!-- Full Height Modal Right -->
+    <div class="modal fade top" id="fullHeightModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+      <div class="modal-dialog modal-full-height modal-top" role="document" id="infoModal">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100" id="myModalLabel">Info & Links</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Useful links</h4>
+            <p>If you want to read about<a href="https://en.wikipedia.org/wiki/Color_model" target="_blank"> color models, click here</a>.</p>
+            <p>These links are about: <a href="https://en.wikipedia.org/wiki/RGB_color_model" target="_blank">RGB</a>, <a href="https://en.wikipedia.org/wiki/HSL_and_HSV" target="_blank">HSL</a> and <a href="https://en.wikipedia.org/wiki/CMYK_color_model" target="_blank">CMYK</a> color models.</p>
+            <p><em><b>Hexadecimal number system (HEX)</b></em> is described <a href="https://en.wikipedia.org/wiki/Hexadecimal" target="_blank">here</a>.</p>
+            <br><br><br>
+            <h6>Credits</h6>
+            <p><a href="https://mdbootstrap.com/docs/b4/jquery/" target="_blank">Bootstrap Material</a> and <a href="https://fontawesome.com/" target="_blank">Font Awesome</a> were used to build the app.</p>
+            <p>The HTML color names are taken from <a href="https://www.thecolorapi.com/" target="_blank">The Color Api</a>.</p>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn aqua-gradient" data-dismiss="modal" style="border-radius: 15px;">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Full Height Modal Right - END-->
+  </div>
+ </body>
+</html>
