@@ -16,7 +16,7 @@ Bootstrap Material was used to build the application. I wrote the conversion fun
 
 1. Used pseudo-elements that Chrome does not support, but the application works fine.
 
-## ScreenShots
+## ScreenShot
 
 <img alt="the App" src="./Readme.md_pics/App.png">
 
