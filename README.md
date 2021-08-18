@@ -6,29 +6,24 @@ Link to the application: [https://test-proj-gda4.web.app/](https://test-proj-gda
 
 ## Description
 
-And more... :smiley:.
+The application generates one of 16.777 million colors and queries <https://www.thecolorapi.com> for the nearest HTML color
+with the name. Then you can change the color with the RGB sliders. The color changes continuously and is displayed in
+grayscale next to it. The grayscale can be changed using the HSL sliders. All values are converted on an ongoing basis: #HEX,
+RGB, HSL and CMYK. There are generated on an ongoing basis RGB, CMYK charts, Hue circle and Saturation and Lightness charts.
+Bootstrap Material was used to build the application. I wrote the conversion functions myself.
 
-## Notes/ToDo List/Issues
+## Notes/ ToDo List/ Issues
 
-1. The API key for OpenWeather.com is not hosted on GitHub.com.
-2. The application works great in Firefox. Chrome does not render a 3D Globe and a dynamic table.
+1. Used pseudo-elements that Chrome does not support, but the application works fine.
 
 ## ScreenShots
 
-<img alt="ISS 2D map" src="./Readme.md_pics/ISS_2D_map.png">
-<img alt="Dynamic chart" src="./Readme.md_pics/Dynamic_Chart.png">
-<img alt="Dynamic table" src="./Readme.md_pics/Dynamic_Table.png">
-<img alt="Visible passes" src="./Readme.md_pics/Visible_Passes.png">
-<img alt="3D ISS path" src="./Readme.md_pics/3D_ISS_path.png">
+<img alt="the App" src="./Readme.md_pics/App.png">
 
 ## Built With
 
-- [OpenStreetMap](https://www.openstreetmap.org/) - The map,
-- [LeafletJS](https://leafletjs.com/) - Rendering the 2D maps,
-- [CesiumJS](https://cesium.com/) - Rendering the 3D Earth,
-- [jQuery](https://jquery.com/) - To build the accordion,
-- [jQuery UI](https://jqueryui.com/) - To build some UI elements and effects,
-- [CanvasJS v1.7](https://canvasjs.com/) - To render dynamic chart.
+- [Font Awesome](https://fontawesome.com/) - Symbols and fonts,
+- [Bootstrap Material](https://mdbootstrap.com/) and [Bootstrap](https://getbootstrap.com/) - UI elements and charts.
 
 ## License
 
