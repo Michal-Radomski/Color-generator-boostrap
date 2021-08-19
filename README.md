@@ -15,6 +15,7 @@ Bootstrap Material was used to build the application. I wrote the conversion fun
 ## Notes/ ToDo List/ Issues
 
 1. Used pseudo-elements that Chrome does not support, but the application works fine.
+2. Responsiveness is not done yet.
 
 ## ScreenShot
 
